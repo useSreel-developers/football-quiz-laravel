@@ -29,7 +29,7 @@
       <a href="{{ route("avatars.edit", $avatar->id) }}" class="btn btn-sm btn-primary">
         Edit
       </a>
-      <form class="d-inline" id="deleteAvatarForm" action="{{ route('avatars.destroy', $avatar->id) }}" method="post">
+      <form class="d-inline" onsubmit="deleteAvatar(event)" action="{{ route('avatars.destroy', $avatar->id) }}" method="post">
         @csrf
         @method("delete")
         <button type="submit" class="btn btn-sm btn-danger">
@@ -44,7 +44,7 @@
 @endif
 
 <script>
-  document.getElementById('deleteAvatarForm').addEventListener('submit', function(e) {
+  function deleteAvatar(e) {
     e.preventDefault();
 
     Swal.fire({
@@ -67,9 +67,9 @@
       allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
       if (result.isConfirmed) {
-        this.submit();
+        e.target.submit();
       }
     });
-  });
+  }
 </script>
 @endsection
