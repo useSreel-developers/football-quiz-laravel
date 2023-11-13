@@ -30,7 +30,7 @@ class AvatarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "name" => "required",
+            "name" => "required|max:50",
             "price" => "required",
             "avatar_image" => "required|image|mimes:jpg,png,jpeg,gif,svg|max:2028"
         ]);
@@ -69,7 +69,7 @@ class AvatarController extends Controller
         }
 
         $request->validate([
-            "name" => "required",
+            "name" => "required|max:50",
             "price" => "required",
             "avatar_image" => "image|mimes:jpg,png,jpeg,gif,svg|max:2028"
         ]);
