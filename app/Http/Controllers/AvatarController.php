@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Avatar;
 use Illuminate\Support\Str;
+use App\Models\Avatar;
 
 class AvatarController extends Controller
 {
@@ -13,13 +13,16 @@ class AvatarController extends Controller
         $avatars = Avatar::orderBy("created_at")->get();
 
         return view("avatars.index", [
-            "avatars" => $avatars
+            "avatars" => $avatars,
+            "title" => "Avatar List"
         ]);
     }
 
     public function create()
     {
-        return view('avatars.create');
+        return view('avatars.create', [
+            "title" => "Add New Avatar"
+        ]);
     }
 
     public function show()
@@ -57,7 +60,7 @@ class AvatarController extends Controller
         }
 
         $avatar = Avatar::findOrFail($id);
-        return view("avatars.edit", ["avatar" => $avatar]);
+        return view("avatars.edit", ["avatar" => $avatar, "title" => "Edit Avatar"]);
     }
 
     public function update(Request $request)
