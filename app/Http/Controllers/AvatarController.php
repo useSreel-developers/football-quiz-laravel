@@ -99,7 +99,7 @@ class AvatarController extends Controller
             abort(404);
         }
 
-        $avatar = Avatar::find($id);
+        $avatar = Avatar::findOrFail($id);
         $avatar->delete();
 
         return redirect()->route("avatars.index")->with("success", "Avatar Deleted Successfully");

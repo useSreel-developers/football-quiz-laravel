@@ -58,4 +58,18 @@ class QuestionController extends Controller
 
         return redirect()->route("questions.index")->with("success", "Question Added Successfully");
     }
+
+    public function destroy($id)
+    {
+        $pattern = '/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i';
+
+        if (!preg_match($pattern, $id) == 1) {
+            abort(404);
+        }
+
+        $question = Question::findOrFail($id);
+        $question->delete();
+
+        return redirect()->route("questions.index")->with("success", "Question Deleted Successfully");
+    }
 }
